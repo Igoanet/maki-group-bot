@@ -1,27 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="340" viewBox="0 0 1280 340" role="img" aria-label="Maki Group Bot">
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="360" viewBox="0 0 1400 360" role="img" aria-label="Maki Group Bot">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#0b1120"/><stop offset="52%" stop-color="#131f3f"/>
-      <stop offset="100%" stop-color="#1e2f63"/>
+      <stop offset="0%" stop-color="#0b1120"><animate attributeName="stop-color"
+        values="#0b1120;#1e2f63;#0b1120" dur="9s" repeatCount="indefinite"/></stop>
+      <stop offset="60%" stop-color="#1e2f63"><animate attributeName="stop-color"
+        values="#1e2f63;#0b1120;#1e2f63" dur="9s" repeatCount="indefinite"/></stop>
+      <stop offset="100%" stop-color="#0b1120"/>
     </linearGradient>
     <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#6cb6ff"/><stop offset="100%" stop-color="#a07bff"/>
+      <stop offset="0%" stop-color="#5ea9ff"/>
+      <stop offset="100%" stop-color="#1e2f63"/>
     </linearGradient>
-    <radialGradient id="glow" cx="82%" cy="18%" r="55%">
-      <stop offset="0%" stop-color="#4f7dff" stop-opacity="0.42"/>
-      <stop offset="100%" stop-color="#4f7dff" stop-opacity="0"/>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#5ea9ff" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#5ea9ff" stop-opacity="0"/>
     </radialGradient>
   </defs>
-  <rect width="1280" height="340" fill="url(#bg)"/>
-  <rect width="1280" height="340" fill="url(#glow)"/>
-  <g stroke="#7ea6ff" stroke-opacity="0.10">
-    <path d="M0 70 H1280M0 130 H1280M0 190 H1280M0 250 H1280"/>
+
+  <style>
+    @keyframes float { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-14px); } }
+    @keyframes drift { 0% { transform: translateX(-40px); } 100% { transform: translateX(1440px); } }
+    @keyframes pulse { 0%,100% { opacity:.35; } 50% { opacity:.85; } }
+    @keyframes shimmer { 0% { background-position: -600px 0; } 100% { background-position: 600px 0; } }
+    .orb { animation: float 6s ease-in-out infinite; }
+    .orb2 { animation: float 8s ease-in-out infinite reverse; }
+    .grid { animation: pulse 5s ease-in-out infinite; }
+    .sweep { animation: drift 14s linear infinite; opacity:.10; }
+  </style>
+
+  <rect width="1400" height="360" fill="url(#bg)"/>
+
+  <g class="grid" stroke="#5ea9ff" stroke-opacity="0.10">
+    <path d="M0 72 H1400M0 144 H1400M0 216 H1400M0 288 H1400"/>
+    <path d="M175 0 V360M350 0 V360M525 0 V360M700 0 V360M875 0 V360M1050 0 V360M1225 0 V360"/>
   </g>
-  <rect x="78" y="104" width="7" height="132" rx="3.5" fill="url(#bar)"/>
-  <text x="116" y="164" font-family="Segoe UI,Inter,Helvetica,Arial,sans-serif"
-        font-size="58" font-weight="700" fill="#ffffff" letter-spacing="-0.5">Maki Group Bot</text>
-  <text x="118" y="212" font-family="Segoe UI,Inter,Helvetica,Arial,sans-serif"
-        font-size="24" fill="#a8c1ea">Complete admin suite for Telegram groups</text>
-  <text x="118" y="256" font-family="Segoe UI,Inter,Helvetica,Arial,sans-serif"
-        font-size="17" fill="#6d88b6" letter-spacing="1.5">PYROGRAM  &middot;  ASYNC  &middot;  PLUGGABLE</text>
+
+  <circle class="orb" cx="1150" cy="90" r="150" fill="url(#glow)"/>
+  <circle class="orb2" cx="220" cy="300" r="120" fill="url(#glow)"/>
+
+  <rect class="sweep" x="0" y="0" width="120" height="360" fill="#ffffff"/>
+
+  <rect x="86" y="112" width="8" height="140" rx="4" fill="url(#bar)">
+    <animate attributeName="height" values="140;152;140" dur="3.5s" repeatCount="indefinite"/>
+  </rect>
+
+  <text x="132" y="150" font-size="64" font-weight="800" fill="#ffffff"
+        font-family="Inter,Segoe UI,Helvetica,Arial,sans-serif" letter-spacing="-1.2">🛡</text>
+  <text x="216" y="150" font-size="60" font-weight="800" fill="#ffffff"
+        font-family="Inter,Segoe UI,Helvetica,Arial,sans-serif" letter-spacing="-1.2">Maki Group Bot</text>
+  <text x="134" y="204" font-size="26" fill="#c3d8f7"
+        font-family="Inter,Segoe UI,Helvetica,Arial,sans-serif">Complete admin suite for Telegram groups</text>
+  <text x="134" y="248" font-size="16" fill="#7f9ac4" letter-spacing="3.2"
+        font-family="Inter,Segoe UI,Helvetica,Arial,sans-serif">MODERATION &middot; PROTECTION &middot; REPORTS &middot; 300+ COMMANDS</text>
 </svg>
