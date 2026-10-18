@@ -1,0 +1,120 @@
+============================================================
+                    MAKI — GROUP MANAGER BOT
+                        @MakiGroupBot
+============================================================
+
+"Your group's silent guardian — keeping every chat clean,
+safe and fun, day and night."
+
+
+------------------------------------------------------------
+WHAT IS MAKI?
+------------------------------------------------------------
+Maki is an all-in-one Telegram group manager bot. Add it to
+your group, make it admin, and it quietly takes care of
+moderation, security and member engagement — so you can
+focus on your community instead of babysitting the chat.
+
+
+------------------------------------------------------------
+KEY FEATURES
+------------------------------------------------------------
+* Welcome & Captcha
+  Greets new members and verifies they're human before
+  they can chat.
+
+* Anti-Spam & Anti-Raid
+  Stops spam floods and coordinated raid attacks
+  automatically.
+
+* Locks
+  Lock links, stickers, media, forwards and more —
+  per group.
+
+* Blocklist
+  Banned words are auto-deleted; repeat offenders get
+  punished.
+
+* Warnings
+  Warn misbehaving members; auto-action after the limit
+  is hit.
+
+* Notes & Filters
+  Save reusable replies and auto-answer common questions.
+
+* Night Mode
+  Automatically locks the group at night and opens it in
+  the morning.
+
+* Federations
+  Link multiple groups and ban troublemakers everywhere
+  at once.
+
+* Quote Stickers
+  Turn any message into a beautiful quote sticker with /q.
+
+* Reports & Stats
+  Members can report problems; admins see group activity
+  stats.
+
+
+------------------------------------------------------------
+THE /start PANEL
+------------------------------------------------------------
+When someone opens Maki in DM and sends /start, they see a
+poster photo with this caption:
+
+    MAKI
+
+    Your group's silent guardian — keeping every chat
+    clean, safe and fun, day and night.
+
+    Add me to your group, sit back and relax — I'll
+    handle the rest.
+
+Below the caption sit four buttons:
+
+1. Add me to your group (green)
+   Opens Telegram's group picker; Maki joins the chosen
+   group and starts working instantly.
+
+2. Help
+   Opens the full command menu with 17 sections covering
+   every feature.
+
+3. Support
+   Opens a direct chat with the owner (@RohanDevta) for
+   help or questions.
+
+4. Owner
+   Also opens @RohanDevta; support and owner are the same
+   person.
+
+
+------------------------------------------------------------
+FOR ADMINS
+------------------------------------------------------------
+Group admins get simple one-word commands — ban, mute,
+warn, pin, purge, lock, and more. Everything is documented
+inside the bot's Help menu, so nothing needs to be
+memorised.
+
+
+------------------------------------------------------------
+OWNER & SUDO SYSTEM
+------------------------------------------------------------
+The bot has a two-level trust system.
+
+The OWNER controls everything, including the most powerful
+commands (mass actions, global bans, broadcast).
+
+Trusted people can be added as SUDO USERS with /addsudo —
+they can run operational commands like /broadcast, /groups
+and /restrict, while owner-only commands stay locked.
+
+/listsudo shows the current team.
+
+
+------------------------------------------------------------
+Built & maintained by @RohanDevta
+============================================================

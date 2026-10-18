@@ -1,0 +1,30 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install tooling
+        run: pip install pyflakes
+      - name: Syntax check
+        run: python -m compileall -q ghelp
+      - name: Undefined names
+        run: |
+          python -m pyflakes ghelp \
+            | grep -v "unable to detect undefined names" \
+            | (! grep "undefined name") || (echo "undefined name found"; exit 1)
+      - name: No secrets committed
+        run: |
+          if git ls-files | grep -E "(\.env$|\.env\.|session|cookie)"; then
+            echo "::error::a secret file is tracked"; exit 1
+          fi
+          echo "no secret files tracked"
