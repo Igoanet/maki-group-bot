@@ -1,6 +1,13 @@
 <div align="center">
-  <img src="assets/banner.svg" alt="Maki Group Bot" width="100%">
+  <img src="assets/banner.svg" alt="maki-group-bot" width="100%">
 </div>
+
+<div align="center">
+  <img src="assets/hero.jpg" alt="maki-group-bot" width="100%">
+  <br>
+  <sub><i>Real-time moderation · protection · reports — rendered in 3D</i></sub>
+</div>
+
 
 <div align="center">
 
