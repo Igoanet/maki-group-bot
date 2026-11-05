@@ -11,7 +11,10 @@ Standard library only — the module is shared by bots with different dependency
 
 from __future__ import annotations
 
-import fcntl
+try:
+    import fcntl
+except ImportError:
+    fcntl = None
 import json
 import logging
 import os
@@ -117,7 +120,8 @@ def _locked_update(change) -> bool:
     """Read-modify-write under a file lock: two bots may edit the same list."""
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     with LOCK.open("a+") as lock:
-        fcntl.flock(lock, fcntl.LOCK_EX)
+        if fcntl:
+            fcntl.flock(lock, fcntl.LOCK_EX)
         try:
             users = _read()
             if users is None:
@@ -126,7 +130,8 @@ def _locked_update(change) -> bool:
                 return False
             _write(users)
         finally:
-            fcntl.flock(lock, fcntl.LOCK_UN)
+            if fcntl:
+                fcntl.flock(lock, fcntl.LOCK_UN)
     _refresh(force=True)
     return True
 
