@@ -525,101 +525,13 @@ def _join_notice(identity) -> str:
 @app.on_message(filters.group & filters.command("vcmonitor", prefixes=["/", "?", "!", "."]))
 @autodel_reply
 async def vcmonitor_command(_, message: types.Message) -> None:
-    # Do not inherit /anonadmin's anonymous sender exception here: this
-    # setting is explicitly limited to a live, identifiable group owner/admin.
-    if not message.from_user or not await has_right(
-        int(message.chat.id), int(message.from_user.id),
-        "can_manage_video_chats",
-    ):
-        await message.reply_text(
-            "You need the Manage video chats admin right to use this command."
-        )
-        return
-    chat_id = int(message.chat.id)
-    store.remember_chat(chat_id)
-    args = [part.lower() for part in (message.command or [])[1:]]
-    if len(args) > 1 or (args and args[0] not in {"on", "off", "status"}):
-        args = ["status"]
-        usage = (
-            "\n\nUsage: <code>/vcmonitor on|off|status</code> "
-            "(group owner/admin only)."
-        )
-    else:
-        usage = ""
-    command = args[0] if args else "status"
-    if command in {"on", "off"}:
-        enabled = command == "on"
-        store.set_enabled(chat_id, enabled)
-        await message.reply_text(
-            f"<b>VC monitor {'enabled' if enabled else 'disabled'}.</b>"
-            + (
-                " Next: ensure Mikasa has an accessible assistant account. "
-                "Maki deletes notices after 5 seconds."
-                if enabled
-                else " Queued notices for this group were discarded."
-            ),
-            parse_mode=enums.ParseMode.HTML,
-        )
-        return
-
-    setting = store.get_setting(chat_id)
-    health = store.get_health(chat_id)
-    enabled_text = "ON" if setting["enabled"] else "OFF"
-    if not health:
-        coverage = (
-            "Coverage unavailable: Mikasa has not reported an online assistant "
-            "with access to this group's voice chat."
-        )
-    else:
-        status = str(health.get("status") or "unknown")
-        last_seen_value = health.get("last_seen")
-        stale = (
-            not last_seen_value
-            or time.time() - float(last_seen_value) > 45.0
-        )
-        if status == "active" and not stale:
-            coverage = (
-                "Coverage active: participant sync is complete; join/leave "
-                "detection is enabled."
-            )
-        elif status == "active" and stale:
-            coverage = (
-                "Coverage unavailable: the last active assistant observation is "
-                "stale, so Mikasa may be offline."
-            )
-        elif status == "assistant_offline":
-            coverage = "Coverage unavailable: Mikasa assistant is offline."
-        elif status in {"inaccessible", "update_gap", "partial_snapshot"}:
-            coverage = (
-                "Coverage incomplete: the selected assistant cannot prove a "
-                "complete participant snapshot yet."
-            )
-        elif status == "no_active_call":
-            coverage = "No active voice chat; coverage will resume when one exists."
-        elif status == "disabled":
-            coverage = "Monitoring is disabled for this group."
-        else:
-            coverage = "Coverage is not currently proven by Mikasa."
-    last_seen = _when(health.get("last_seen")) if health else "never"
-    detail = html.escape(str(health.get("detail") or "")[:256]) if health else ""
-    error = html.escape(str(health.get("last_error") or "")[:160]) if health else ""
-    suffix = (
-        f"\nLast assistant observation: <code>{last_seen}</code>"
-        + (f"\nDetail: {detail}" if detail else "")
-        + (f"\nPoll error: <code>{error}</code>" if error else "")
-    )
     await message.reply_text(
-        f"<b>VC monitor: {enabled_text}</b>\n{coverage}{suffix}{usage}",
+        "ℹ️ <b>Voice Chat Monitor has moved to Mikasa Music Bot.</b>\n\n"
+        "All VC join notifications and group controls are now handled directly by Mikasa.\n"
+        "Please run <code>/vcmonitor on|off|status</code> with Mikasa Bot in this group.",
         parse_mode=enums.ParseMode.HTML,
     )
 
 
 async def on_start(_app) -> None:
-    global _consumer
-    if _consumer is not None:
-        return
-    _consumer = MakiVCConsumer(
-        app, storage=store, sync_known=_sync_known_groups,
-        delete_delay=_NOTICE_DELETE,
-    )
-    await _consumer.run()
+    logger.info("VC monitor consumer disabled on Maki (migrated to Mikasa Music Bot)")

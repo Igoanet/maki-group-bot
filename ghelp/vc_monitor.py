@@ -1,16 +1,20 @@
-"""Import wrapper for the host-local shared VC monitor implementation."""
+"""Voice Chat participant identity structures and helpers."""
 
 from __future__ import annotations
 
-import sys
-from pathlib import Path
+import html
+from dataclasses import dataclass
 
-_SHARED = next(
-    parent / "shared"
-    for parent in Path(__file__).resolve().parents
-    if (parent / "shared" / "vc_monitor.py").exists()
-)
-if str(_SHARED) not in sys.path:
-    sys.path.insert(0, str(_SHARED))
 
-from vc_monitor import *  # noqa: F401,F403,E402
+@dataclass
+class PublicIdentity:
+    peer_id: int
+    name: str
+    username: str = ""
+    kind: str = "user"
+
+
+def escaped_notice(identity: PublicIdentity) -> tuple[str, str]:
+    name = html.escape(identity.name[:256], quote=True)
+    username = html.escape(identity.username[:64], quote=True) if identity.username else ""
+    return name, username
